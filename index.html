@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Jaffer Hussin | Animated Video Editor Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Poppins & Bebas Neue -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'forest': '#1A2B23',
+                        'forest-dark': '#121e17',
+                        'amber': {
+                            400: '#FFD147',
+                            500: '#FFBF00',
+                            600: '#E6AC00',
+                        }
+                    },
+                    fontFamily: {
+                        'bebas': ['"Bebas Neue"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1A2B23; /* Deep Forest Green */
+            color: #e5e7eb;
+        }
+        .portfolio-video-item {
+            transform: scale(0.95); /* Slightly smaller by default */
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .portfolio-video-item:hover {
+            transform: scale(1); /* Scale up to full size on hover */
+            box-shadow: 0 20px 40px rgba(255, 191, 0, 0.2), 0 15px 15px rgba(0,0,0,0.2); /* Amber Shadow */
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .modal.flex {
+            display: flex;
+        }
+        .modal.opacity-100 .modal-content {
+            transform: scale(1);
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #FFBF00; /* Amber Spinner */
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animation on Scroll Styles */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: none !important;
+        }
+        .delay-1 { transition-delay: 150ms; }
+        .delay-2 { transition-delay: 300ms; }
+        .delay-3 { transition-delay: 450ms; }
+
+        .anim-fade-in-up { transform: translateY(50px); }
+        .anim-fade-in-left { transform: translateX(-50px); }
+        .anim-fade-in-right { transform: translateX(50px); }
+        .anim-zoom-in { transform: scale(0.9); }
+        
+        /* Custom object position for specific images */
+        .object-position-top {
+            object-position: top;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white transition-transform duration-300 inline-block hover:scale-105">Mohammad Jaffer Hussin</a>
+            <div class="hidden md:flex space-x-8 items-center">
+                <a href="#portfolio" class="text-gray-300 hover:text-white transition-transform duration-300 inline-block hover:scale-110">Work</a>
+                <a href="#about" class="text-gray-300 hover:text-white transition-transform duration-300 inline-block hover:scale-110">About</a>
+                <a href="#contact" class="bg-amber-500 hover:bg-amber-600 text-forest-dark font-bold py-2 px-4 rounded-lg transition-all duration-300 transform hover:scale-105">Contact Me</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-white focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+             <a href="#portfolio" class="block text-gray-300 hover:text-white transition py-2">Work</a>
+             <a href="#about" class="block text-gray-300 hover:text-white transition py-2">About</a>
+             <a href="#contact" class="block bg-amber-500 hover:bg-amber-600 text-forest-dark font-bold py-2 px-4 rounded-lg transition mt-2 text-center">Contact Me</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="h-screen bg-cover bg-center flex items-center justify-center text-center relative" style="background-image: url('https://images.unsplash.com/photo-1574717521952-9241935b8422?q=80&w=1887&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-black/60"></div>
+        <div class="relative z-10 px-4">
+            <div class="animate-on-scroll anim-fade-in-up">
+                <h1 class="text-4xl lg:text-6xl font-black text-white uppercase tracking-wider">Visual Storyteller</h1>
+                <div class="w-24 h-1 bg-amber-500 mt-4 mb-6 mx-auto"></div>
+                <p class="text-lg lg:text-xl text-gray-300 max-w-md mx-auto">Crafting compelling narratives through the art of video editing.</p>
+            </div>
+            <a href="#portfolio" class="mt-8 inline-block bg-amber-500 hover:bg-amber-600 text-forest-dark font-bold py-3 px-8 rounded-lg text-lg transition-transform transform hover:scale-105 animate-on-scroll anim-fade-in-up delay-1">View My Work</a>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-white mb-4 animate-on-scroll anim-zoom-in">My Best Reels</h2>
+            <p class="text-center text-gray-400 mb-20 max-w-2xl mx-auto animate-on-scroll anim-fade-in-up delay-1">A handpicked collection of my favorite projects that showcase my editing skills and creative style.</p>
+            
+            <div class="space-y-28">
+                <!-- Reel 1: INCEPTION VIDEO -->
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                    <a href="https://drive.google.com/file/d/1-VXzb81ZWskQHPY4gdETW4hBXTVl_XPD/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="md:w-1/2 animate-on-scroll anim-fade-in-left">
+                        <div class="portfolio-video-item cursor-pointer group relative overflow-hidden rounded-lg" style="padding-bottom: 56.25%;">
+                            <img src="https://i.ibb.co/V0gy72WK/i2.jpg" alt="Inception Style Trailer" class="absolute top-0 left-0 w-full h-full object-cover object-center">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><i class="fas fa-external-link-alt text-white text-5xl"></i></div>
+                        </div>
+                    </a>
+                    <div class="md:w-1/2 text-center md:text-left animate-on-scroll anim-fade-in-right">
+                        <h3 class="font-bebas text-4xl lg:text-5xl tracking-wide font-bold text-white transition-transform duration-300 inline-block hover:scale-105">Inception Style Trailer</h3>
+                        <p class="text-amber-400 font-semibold mt-1 mb-4">Cinematic Trailer</p>
+                        <p class="text-gray-300 leading-relaxed">A personal project inspired by Christopher Nolan's 'Inception'. This reel showcases advanced sound design, dramatic color grading, and precise pacing to build suspense and create a cinematic, high-stakes atmosphere. Skills highlighted include audio mixing, color correction, and narrative editing.</p>
+                    </div>
+                </div>
+
+                <!-- Reel 2: HOMELANDER VIDEO -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12">
+                    <a href="https://drive.google.com/file/d/1oKqb_Zs0sUxG4f5hoslQnC79DkhjbnfC/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="md:w-1/2 animate-on-scroll anim-fade-in-right">
+                        <div class="portfolio-video-item cursor-pointer group relative overflow-hidden rounded-lg" style="padding-bottom: 56.25%;">
+                            <img src="https://i.ibb.co/tTxy54GK/1000108379.jpg" alt="Homelander Character Edit" class="absolute top-0 left-0 w-full h-full object-cover object-position-top">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><i class="fas fa-external-link-alt text-white text-5xl"></i></div>
+                        </div>
+                    </a>
+                    <div class="md:w-1/2 text-center md:text-left animate-on-scroll anim-fade-in-left">
+                        <h3 class="font-bebas text-4xl lg:text-5xl tracking-wide font-bold text-white transition-transform duration-300 inline-block hover:scale-105">Homelander Character Edit</h3>
+                        <p class="text-amber-400 font-semibold mt-1 mb-4">Character Study</p>
+                        <p class="text-gray-300 leading-relaxed">This edit explores the menacing character of Homelander. It features aggressive, fast-paced cuts synchronized to a powerful music track, showcasing skills in rhythmic editing, visual storytelling, and creating a strong, intimidating mood through clip selection and timing.</p>
+                    </div>
+                </div>
+
+                <!-- Reel 3: VERGIL VIDEO -->
+                <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+                     <a href="https://drive.google.com/file/d/1nxOu_35bQh6UqRtGkDgWScgLnU1aR41-/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="md:w-1/2 animate-on-scroll anim-fade-in-left">
+                        <div class="portfolio-video-item cursor-pointer group relative overflow-hidden rounded-lg" style="padding-bottom: 56.25%;">
+                            <img src="https://i.ibb.co/RGkh608G/31806741110313580.jpg" alt="Vergil Tribute" class="absolute top-0 left-0 w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><i class="fas fa-external-link-alt text-white text-5xl"></i></div>
+                        </div>
+                    </a>
+                    <div class="md:w-1/2 text-center md:text-left animate-on-scroll anim-fade-in-right">
+                        <h3 class="font-bebas text-4xl lg:text-5xl tracking-wide font-bold text-white transition-transform duration-300 inline-block hover:scale-105">Vergil Tribute</h3>
+                        <p class="text-amber-400 font-semibold mt-1 mb-4">Gaming Edit</p>
+                        <p class="text-gray-300 leading-relaxed">A tribute to the iconic character Vergil. This video highlights skills in motion tracking, smooth transitions (twixtor), and syncing gameplay with music to create a fluid and action-packed sequence. The focus is on technical precision and visual flair.</p>
+                    </div>
+                </div>
+
+                <!-- Reel 4: NEXT GREATEST VIDEO -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-12">
+                     <a href="https://drive.google.com/file/d/1nNe2LIEyxDMjwWoDLuHmFLGqk-NRek6w/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="md:w-1/2 animate-on-scroll anim-fade-in-right">
+                        <div class="portfolio-video-item cursor-pointer group relative overflow-hidden rounded-lg" style="padding-bottom: 56.25%;">
+                            <img src="https://i.ibb.co/XxB6bdQY/1000108381.jpg" alt="Motivational Cricket Edit" class="absolute top-0 left-0 w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"><i class="fas fa-external-link-alt text-white text-5xl"></i></div>
+                        </div>
+                    </a>
+                    <div class="md:w-1/2 text-center md:text-left animate-on-scroll anim-fade-in-left">
+                        <h3 class="font-bebas text-4xl lg:text-5xl tracking-wide font-bold text-white transition-transform duration-300 inline-block hover:scale-105">The Next Greatest</h3>
+                        <p class="text-amber-400 font-semibold mt-1 mb-4">Motivational Edit</p>
+                        <p class="text-gray-300 leading-relaxed">This motivational edit combines powerful speeches with impactful visuals. Key skills demonstrated include audio layering, narrative construction through clip selection, and creating an emotional, inspiring tone through careful pacing and music choice.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-forest-dark">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-left">
+                <div class="animate-on-scroll anim-fade-in-up">
+                    <h2 class="text-3xl font-bold text-white mb-4">About Me</h2>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        For me, editing is about finding the heartbeat of a story. I get obsessed with that perfect cut, that moment the music swells just right, or the piece of dialogue that changes everything.
+                    </p>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        My real passion is weaving together sound, picture, and pacing to create a specific feeling. I love the challenge of jumping between worlds—from the gritty atmosphere of a cinematic character study to the explosive energy of a gaming trailer or the professional polish of a live sports broadcast.
+                    </p>
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        If you have a story that needs to feel powerful, emotional, and unforgettable, I have the skills and the dedication to help you bring it to life.
+                    </p>
+                    <p class="text-amber-400 font-semibold text-lg leading-relaxed">
+                        Let's make something incredible together.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="animate-on-scroll anim-fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Get In Touch</h2>
+                <p class="text-gray-400 my-8">Ready to bring your story to life? Reach out directly:</p>
+                <div class="space-y-4">
+                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mohammad.jaffer.hussin@gmail.com" target="_blank" rel="noopener noreferrer" class="bg-amber-500 hover:bg-amber-600 text-forest-dark font-bold py-4 px-8 rounded-lg text-xl transition-transform transform hover:scale-105 inline-block">
+                        mohammad.jaffer.hussin@gmail.com
+                    </a>
+                    <div class="mt-6">
+                        <a href="tel:+918169142920" class="text-amber-400 hover:text-amber-500 text-xl transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-3">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 8169142920</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="mt-12 flex justify-center space-x-6">
+                    <a href="https://www.instagram.com/beyondtheclip_/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-amber-400 text-2xl transition-all duration-300 transform hover:scale-125"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/mohammad-jaffer-hussin-614674315" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-amber-400 text-2xl transition-all duration-300 transform hover:scale-125"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-forest-dark py-6">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p>&copy; 2024 Mohammad Jaffer Hussin. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="modal fixed inset-0 bg-black bg-opacity-80 z-50 items-center justify-center p-4">
+        <div class="modal-content bg-forest-dark w-full max-w-4xl rounded-lg shadow-lg relative">
+            <button id="close-modal" class="absolute -top-3 -right-3 bg-white text-black rounded-full h-8 w-8 flex items-center justify-center text-xl z-10">&times;</button>
+            <div class="aspect-w-16 aspect-h-9">
+                <iframe id="video-iframe" class="w-full h-full rounded-t-lg" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="p-6">
+                <h3 id="modal-video-title" class="text-2xl font-bold text-white mb-4"></h3>
+                <button id="generate-brief-btn" class="bg-amber-500 hover:bg-amber-600 text-forest-dark font-bold py-2 px-4 rounded-lg transition mb-4 flex items-center">
+                     <span id="brief-btn-text">✨ Generate Sample Brief</span>
+                     <div id="brief-spinner" class="spinner hidden ml-2"></div>
+                </button>
+                <div id="brief-results" class="text-gray-300 bg-gray-900 p-4 rounded-lg min-h-[80px] whitespace-pre-wrap"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+            // --- Animation on Scroll ---
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    } else {
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+
+            // --- Video Modal Logic ---
+            const modal = document.getElementById('video-modal');
+            const closeModalButton = document.getElementById('close-modal');
+            const videoIframe = document.getElementById('video-iframe');
+            const modalVideoTitle = document.getElementById('modal-video-title');
+            const generateBriefBtn = document.getElementById('generate-brief-btn');
+            const briefResults = document.getElementById('brief-results');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
+            let currentVideoInfo = {};
+
+            portfolioItems.forEach(item => {
+                // This logic is now only for items that should open the modal
+                if (item.hasAttribute('data-video-id')) {
+                    item.addEventListener('click', () => {
+                        const videoId = item.getAttribute('data-video-id');
+                        const videoTitle = item.getAttribute('data-title');
+                        currentVideoInfo = { title: videoTitle, category: item.parentElement.querySelector('p').textContent };
+                        videoIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+                        modalVideoTitle.textContent = videoTitle;
+                        briefResults.textContent = '';
+                        modal.classList.add('flex');
+                        setTimeout(() => modal.classList.add('opacity-100'), 10);
+                    });
+                }
+            });
+
+            function closeModal() {
+                videoIframe.src = '';
+                modal.classList.remove('opacity-100');
+                setTimeout(() => modal.classList.remove('flex'), 300);
+            }
+
+            closeModalButton.addEventListener('click', closeModal);
+            window.addEventListener('keydown', (e) => e.key === 'Escape' && closeModal());
+            modal.addEventListener('click', (e) => e.target === modal && closeModal());
+
+            // --- Gemini API Integration ---
+            const apiKey = ""; // IMPORTANT: Add your Google AI API key here.
+
+            async function callGeminiAPI(prompt, button, spinner, buttonText, resultContainer) {
+                if (!apiKey) {
+                    resultContainer.textContent = "API Key not configured. Please add your API key in the script.";
+                    return;
+                }
+                button.disabled = true;
+                spinner.classList.remove('hidden');
+                buttonText.classList.add('hidden');
+                resultContainer.textContent = 'Generating...';
+                try {
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                    const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
+                    const result = await response.json();
+                    if (result.candidates && result.candidates.length > 0) {
+                        resultContainer.textContent = result.candidates[0].content.parts[0].text.trim();
+                    } else {
+                        throw new Error("No content received from API.");
+                    }
+                } catch (error) {
+                    console.error("Gemini API call failed:", error);
+                    resultContainer.textContent = `Error: ${error.message}. Check the console for details.`;
+                } finally {
+                    button.disabled = false;
+                    spinner.classList.add('hidden');
+                    buttonText.classList.remove('hidden');
+                }
+            }
+
+            // This part is removed as the AI generator is no longer on the page
+            // const ideaInput = document.getElementById('idea-input');
+            // const generateIdeasBtn = document.getElementById('generate-ideas-btn');
+            // const ideaResults = document.getElementById('idea-results');
+            // const ideaSpinner = document.getElementById('idea-spinner');
+            // const ideaBtnText = document.getElementById('idea-btn-text');
+            // generateIdeasBtn.addEventListener('click', () => { ... });
+
+            const briefSpinner = document.getElementById('brief-spinner');
+            const briefBtnText = document.getElementById('brief-btn-text');
+
+            generateBriefBtn.addEventListener('click', () => {
+                const { title, category } = currentVideoInfo;
+                if (!title || !category) return;
+                const prompt = `You are a marketing manager writing a project brief for a video editor. The project is a "${category}" video titled "${title}".
+Write a sample creative brief for this project. The brief should include:
+1.  **Objective:** What is the goal of this video?
+2.  **Target Audience:** Who are we trying to reach?
+3.  **Key Message:** What is the main takeaway?
+4.  **Desired Tone & Style:** Describe the mood, pacing, and visual style (e.g., "energetic and modern," "inspirational and cinematic").
+Format the output clearly using markdown headings.`;
+                callGeminiAPI(prompt, generateBriefBtn, briefSpinner, briefBtnText, briefResults);
+            });
+        });
+    </script>
+</body>
+</html>
