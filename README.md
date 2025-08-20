@@ -9,16 +9,6 @@ A clean, responsive, and personal portfolio website built to showcase my project
 
 ### [➡️ View Live Demo](https://portfolio-ten-zeta-93.vercel.app/)
 
-<!--
-IMPORTANT:
-1. Replace the link above with your actual live demo URL.
-2. Take a screenshot of your website and add it to your repository.
-   Then, update the image path below. A good place for it is in an `assets` folder.
--->
-<p align="center">
-  <img src="./assets/screenshot.png" alt="Project Screenshot" width="800"/>
-</p>
-
 ## ✨ Features
 
 * **Responsive Design:** Looks great on all devices, from desktops to mobile phones.
@@ -56,14 +46,10 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ## 📬 Contact
 
-Mohammed Jaffer - mohammad.jaffer.hussin@gmail.com
-
-Project Link: [https://github.com/momojaffer1804/portfolio](https://github.com/momojaffer1804/portfolio)
-
+- **Mohammed Jaffer:** mohammad.jaffer.hussin@gmail.com
+- **Project Link:** [https://github.com/momojaffer1804/portfolio](https://github.com/momojaffer1804/portfolio)
+- **LinkedIn:** www.linkedin.com/in/mohammad-jaffer-hussin-614674315
 <!--
-Optional: Add links to your professional profiles.
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/your-linkedin-username
 -->
